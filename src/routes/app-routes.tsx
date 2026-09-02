@@ -23,119 +23,112 @@ const YouthEngagementPage = lazy(() => import("@/pages/YouthEngagementPage").the
 const ActivitiesPage = lazy(() => import("@/pages/ActivitiesPage").then((m) => ({ default: m.ActivitiesPage })));
 const ElectionInfoPage = lazy(() => import("@/pages/ElectionInfoPage").then((m) => ({ default: m.ElectionInfoPage })));
 const HowToBecomeMpPage = lazy(() => import("@/pages/HowToBecomeMpPage").then((m) => ({ default: m.HowToBecomeMpPage })));
-const AdminCmsPage = lazy(() => import("@/pages/AdminCmsPage").then((m) => ({ default: m.AdminCmsPage })));
 const SearchResultsPage = lazy(() => import("@/pages/SearchResultsPage").then((m) => ({ default: m.SearchResultsPage })));
-const AnalyticsPage = lazy(() => import("@/pages/AnalyticsPage").then((m) => ({ default: m.AnalyticsPage })));
 const DesignSystemShowcasePage = lazy(() => import("@/pages/DesignSystemShowcasePage").then((m) => ({ default: m.DesignSystemShowcasePage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <RootLayout />,
+      errorElement: <NotFoundPage />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "about",
+          element: <AboutPage />,
+        },
+        {
+          path: "constituencies",
+          element: <ConstituenciesPage />,
+        },
+        {
+          path: "constituencies/:id",
+          element: <ConstituencyDetailPage />,
+        },
+        {
+          path: "mps",
+          element: <YouthMpsPage />,
+        },
+        {
+          path: "mps/:id",
+          element: <YouthMpProfilePage />,
+        },
+        {
+          path: "leadership",
+          element: <LeadershipPage />,
+        },
+        {
+          path: "committees",
+          element: <CommitteesPage />,
+        },
+        {
+          path: "committees/:id",
+          element: <CommitteeDetailPage />,
+        },
+        {
+          path: "news",
+          element: <NewsPage />,
+        },
+        {
+          path: "news/:id",
+          element: <NewsDetailPage />,
+        },
+        {
+          path: "events",
+          element: <EventsPage />,
+        },
+        {
+          path: "events/:id",
+          element: <EventDetailPage />,
+        },
+        {
+          path: "resources",
+          element: <ResourceCentrePage />,
+        },
+        {
+          path: "media",
+          element: <MediaCentrePage />,
+        },
+        {
+          path: "engagement",
+          element: <YouthEngagementPage />,
+        },
+        {
+          path: "activities",
+          element: <ActivitiesPage />,
+        },
+        {
+          path: "elections",
+          element: <ElectionInfoPage />,
+        },
+        {
+          path: "how-to-become-youth-mp",
+          element: <HowToBecomeMpPage />,
+        },
+        {
+          path: "search",
+          element: <SearchResultsPage />,
+        },
+        {
+          path: "design-system",
+          element: <DesignSystemShowcasePage />,
+        },
+        {
+          path: "*",
+          element: <NotFoundPage />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <RootLayout />,
-    errorElement: <NotFoundPage />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "about",
-        element: <AboutPage />,
-      },
-      {
-        path: "constituencies",
-        element: <ConstituenciesPage />,
-      },
-      {
-        path: "constituencies/:id",
-        element: <ConstituencyDetailPage />,
-      },
-      {
-        path: "mps",
-        element: <YouthMpsPage />,
-      },
-      {
-        path: "mps/:id",
-        element: <YouthMpProfilePage />,
-      },
-      {
-        path: "leadership",
-        element: <LeadershipPage />,
-      },
-      {
-        path: "committees",
-        element: <CommitteesPage />,
-      },
-      {
-        path: "committees/:id",
-        element: <CommitteeDetailPage />,
-      },
-      {
-        path: "news",
-        element: <NewsPage />,
-      },
-      {
-        path: "news/:id",
-        element: <NewsDetailPage />,
-      },
-      {
-        path: "events",
-        element: <EventsPage />,
-      },
-      {
-        path: "events/:id",
-        element: <EventDetailPage />,
-      },
-      {
-        path: "resources",
-        element: <ResourceCentrePage />,
-      },
-      {
-        path: "media",
-        element: <MediaCentrePage />,
-      },
-      {
-        path: "engagement",
-        element: <YouthEngagementPage />,
-      },
-      {
-        path: "activities",
-        element: <ActivitiesPage />,
-      },
-      {
-        path: "elections",
-        element: <ElectionInfoPage />,
-      },
-      {
-        path: "how-to-become-youth-mp",
-        element: <HowToBecomeMpPage />,
-      },
-      {
-        path: "admin",
-        element: <AdminCmsPage />,
-      },
-      {
-        path: "search",
-        element: <SearchResultsPage />,
-      },
-      {
-        path: "analytics",
-        element: <AnalyticsPage />,
-      },
-      {
-        path: "design-system",
-        element: <DesignSystemShowcasePage />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />,
-      },
-    ],
-  },
-], {
-  basename: import.meta.env.BASE_URL,
-});
+    basename: import.meta.env.BASE_URL,
+  }
+);
 
 export const AppRoutes: FC = () => {
   return (
