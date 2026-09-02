@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink, Mail, MapPin, Phone, Vote, ShieldCheck } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site-config";
+import logoImage from "@/assets/logo.png";
 
 export const Footer: FC = () => {
   return (
@@ -12,7 +13,7 @@ export const Footer: FC = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
-                src="/brand/logo.png"
+                src={logoImage}
                 alt="Ghana Youth Parliament Logo"
                 className="w-10 h-10 object-contain rounded border border-[#F9C511] bg-white shrink-0"
               />

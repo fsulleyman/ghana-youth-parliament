@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ExternalLink, Menu, X, Vote, Search } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site-config";
 import { Button } from "@/components/ui/button";
+import logoImage from "@/assets/logo.png";
 
 export const Header: FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -88,7 +89,7 @@ export const Header: FC = () => {
         {/* Branding Logo Block */}
         <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
           <img
-            src="/brand/logo.png"
+            src={logoImage}
             alt="Ghana Youth Parliament Logo"
             className="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded border border-slate-200 bg-white"
           />
