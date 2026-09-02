@@ -133,7 +133,9 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+], {
+  basename: import.meta.env.BASE_URL,
+});
 
 export const AppRoutes: FC = () => {
   return (

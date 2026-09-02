@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/ghana-youth-parliament/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
