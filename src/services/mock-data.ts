@@ -1,0 +1,802 @@
+export interface MockYouthMP {
+  id: string;
+  fullName: string;
+  constituency: string;
+  constituencyId: string;
+  region: string;
+  committee: string;
+  status: "Current" | "Past";
+  photoUrl: string;
+  bio?: string;
+  email?: string;
+  isLeadership?: boolean;
+  leadershipTitle?: string;
+}
+
+export interface MockConstituency {
+  id: string;
+  name: string;
+  code: string;
+  region: string;
+  capital: string;
+  mpName: string;
+  youthMpId: string;
+  totalYouthPopulation: string;
+  activeInitiativesCount: number;
+  description: string;
+}
+
+export interface MockNewsArticle {
+  id: string;
+  title: string;
+  summary: string;
+  content: string;
+  category: string;
+  date: string;
+  readTime: string;
+  author: string;
+  imageUrl?: string;
+  featured?: boolean;
+}
+
+export interface MockEvent {
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  time: string;
+  location: string;
+  status: "upcoming" | "ongoing" | "completed";
+  description: string;
+  organizer: string;
+  targetAudience: string;
+  registrationNote: string;
+  agenda?: { time: string; item: string }[];
+}
+
+export interface MockActivity {
+  id: string;
+  title: string;
+  mpName: string;
+  youthMpId: string;
+  constituency: string;
+  constituencyId: string;
+  region: string;
+  date: string;
+  category: string;
+  description: string;
+  youthReached: string;
+  photoUrl?: string;
+}
+
+export interface MockResource {
+  id: string;
+  title: string;
+  category: string;
+  fileType: string;
+  fileSize: string;
+  publishDate: string;
+  version: string;
+  description: string;
+  downloadUrl?: string;
+  featured?: boolean;
+}
+
+export interface MockMediaItem {
+  id: string;
+  title: string;
+  type: "photo" | "video" | "statement";
+  category: string;
+  date: string;
+  url: string;
+  thumbnailUrl?: string;
+  description?: string;
+}
+
+export interface MockPetition {
+  id: string;
+  title: string;
+  committee: string;
+  leadPetitioner: string;
+  signaturesCount: number;
+  targetSignatures: number;
+  status: "Open for Support" | "Under Committee Review" | "Adopted";
+  summary: string;
+  dateSubmitted: string;
+}
+
+export interface MockPollOption {
+  id: string;
+  text: string;
+  votes: number;
+}
+
+export interface MockPoll {
+  id: string;
+  question: string;
+  category: string;
+  totalVotes: number;
+  options: MockPollOption[];
+}
+
+export interface MockCommittee {
+  id: string;
+  name: string;
+  mandate: string;
+  chairName: string;
+  chairMpId?: string;
+  viceChairName: string;
+  viceChairMpId?: string;
+  memberCount: number;
+  reportsCount: number;
+}
+
+export interface MockLeadershipMember {
+  id: string;
+  title: string;
+  fullName: string;
+  roleDescription: string;
+  category: "presiding" | "bureau" | "secretariat";
+  photoUrl: string;
+  mpId?: string;
+  constituency?: string;
+}
+
+export const GHANA_REGIONS = [
+  "All Regions",
+  "Greater Accra",
+  "Ashanti",
+  "Western",
+  "Northern",
+  "Central",
+  "Eastern",
+  "Volta",
+  "Upper East",
+  "Upper West",
+  "Bono",
+  "Bono East",
+  "Ahafo",
+  "Oti",
+  "Savannah",
+  "North East",
+  "Western North",
+];
+
+export const PARLIAMENTARY_COMMITTEES = [
+  "All Committees",
+  "Education & Youth Empowerment",
+  "Gender, Children & Social Protection",
+  "Employment, Trade & Industry",
+  "Constitutional & Legal Affairs",
+  "Tourism, Culture & Heritage",
+  "Environment & Climate Action",
+];
+
+export const NEWS_CATEGORIES = [
+  "All Categories",
+  "Parliamentary Sessions",
+  "Committee Reports",
+  "Community Engagement",
+  "Official Announcements",
+  "Press Releases",
+];
+
+export const EVENT_CATEGORIES = [
+  "All Categories",
+  "Parliamentary Plenary",
+  "Committee Hearing",
+  "Leadership Forum",
+  "Youth Townhall",
+  "Regional Workshop",
+];
+
+export const RESOURCE_CATEGORIES = [
+  "All Categories",
+  "Standing Orders & Rules",
+  "Election & Membership Guides",
+  "Annual Reports & Policy Papers",
+  "Parliamentary Forms & Memos",
+  "Legal & Constitutional Documents",
+];
+
+export const RESOURCE_FILE_TYPES = [
+  "All File Types",
+  "PDF Document",
+  "Word Document",
+  "Spreadsheet",
+];
+
+export const ACTIVITY_CATEGORIES = [
+  "All Categories",
+  "Skills Workshop",
+  "Civic Outreach",
+  "Career Fair",
+  "Health Campaign",
+  "Tree Planting",
+];
+
+// 16 Youth MP Records — 12 Current, 4 Past
+// Uses brand-colored initials avatar placeholders (Green for Current, Slate for Past)
+export const MOCK_YOUTH_MPS: MockYouthMP[] = [
+  {
+    id: "mp-1",
+    fullName: "Hon. Emmanuel Addo",
+    constituency: "Ayawaso West Wuogon",
+    constituencyId: "c-1",
+    region: "Greater Accra",
+    committee: "Education & Youth Empowerment",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Emmanuel+Addo&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Emmanuel Addo is a passionate youth advocate and technology practitioner representing Ayawaso West Wuogon in the Youth Parliament. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "e.addo@youthparliament.gov.gh",
+    isLeadership: true,
+    leadershipTitle: "Rt. Hon. Speaker",
+  },
+  {
+    id: "mp-2",
+    fullName: "Hon. Abena Osei-Owusu",
+    constituency: "Subin",
+    constituencyId: "c-2",
+    region: "Ashanti",
+    committee: "Gender, Children & Social Protection",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Abena+Osei-Owusu&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Abena Osei-Owusu leads advocacy for adolescent empowerment, girl-child STEM initiatives, and social protection frameworks in Subin. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "a.owusu@youthparliament.gov.gh",
+    isLeadership: true,
+    leadershipTitle: "Deputy Speaker",
+  },
+  {
+    id: "mp-3",
+    fullName: "Hon. Kweku Mensah",
+    constituency: "Sekondi",
+    constituencyId: "c-3",
+    region: "Western",
+    committee: "Employment, Trade & Industry",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Kweku+Mensah&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Kweku Mensah champions maritime trade skills, port logistics training, and vocational empowerment for youth in Western Region. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "k.mensah@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-4",
+    fullName: "Hon. Fatimah Alhassan",
+    constituency: "Tamale Central",
+    constituencyId: "c-4",
+    region: "Northern",
+    committee: "Constitutional & Legal Affairs",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Fatimah+Alhassan&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Fatimah Alhassan focuses on civic legal literacy, peacebuilding dialogues, and northern youth parliamentary engagement. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "f.alhassan@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-5",
+    fullName: "Hon. Yaw Boateng-Gyan",
+    constituency: "Cape Coast South",
+    constituencyId: "c-5",
+    region: "Central",
+    committee: "Tourism, Culture & Heritage",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Yaw+Boateng-Gyan&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Yaw Boateng-Gyan promotes historic preservation, coastal youth sanitation campaigns, and creative arts development in Central Region. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "y.boateng@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-6",
+    fullName: "Hon. Grace Ankrah",
+    constituency: "Koforidua Central",
+    constituencyId: "c-6",
+    region: "Eastern",
+    committee: "Environment & Climate Action",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Grace+Ankrah&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Grace Ankrah is a youth environmental research activist driving community tree planting and watershed conservation. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "g.ankrah@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-7",
+    fullName: "Hon. Fiifi Agyapong",
+    constituency: "Ho Central",
+    constituencyId: "c-7",
+    region: "Volta",
+    committee: "Education & Youth Empowerment",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Fiifi+Agyapong&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Fiifi Agyapong advocates digital classroom access, teacher-support volunteers, and rural literacy programs across Volta. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "f.agyapong@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-8",
+    fullName: "Hon. Aisha Mohammed",
+    constituency: "Bolgatanga Central",
+    constituencyId: "c-8",
+    region: "Upper East",
+    committee: "Gender, Children & Social Protection",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Aisha+Mohammed&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Aisha Mohammed leads community programs tackling youth migration, maternal healthcare awareness, and craft cooperatives. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "a.mohammed@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-9",
+    fullName: "Hon. Kwame Appiah",
+    constituency: "Sunyani East",
+    constituencyId: "c-9",
+    region: "Bono",
+    committee: "Employment, Trade & Industry",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Kwame+Appiah&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Kwame Appiah focuses on commercial agriculture value-addition and youth agri-tech enterprise incubation in Bono. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "k.appiah@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-10",
+    fullName: "Hon. Akosua Frimpong",
+    constituency: "Nkwanta South",
+    constituencyId: "c-10",
+    region: "Oti",
+    committee: "Constitutional & Legal Affairs",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Akosua+Frimpong&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Akosua Frimpong advocates youth civic participation, constitutional reform proposals, and border-town youth security. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "a.frimpong@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-11",
+    fullName: "Hon. Ibrahim Musah",
+    constituency: "Wa Central",
+    constituencyId: "c-11",
+    region: "Upper West",
+    committee: "Environment & Climate Action",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Ibrahim+Musah&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Ibrahim Musah leads anti-desertification campaigns, solar pumping initiatives, and climate resilience workshops in Wa. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "i.musah@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-12",
+    fullName: "Hon. Cynthia Quaye",
+    constituency: "Tema East",
+    constituencyId: "c-12",
+    region: "Greater Accra",
+    committee: "Employment, Trade & Industry",
+    status: "Current",
+    photoUrl: "https://ui-avatars.com/api/?name=Cynthia+Quaye&background=187B28&color=ffffff&bold=true&size=250",
+    bio: "Hon. Cynthia Quaye advocates port city youth employment policies, industrial safety standards, and tech apprenticeship grants. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "c.quaye@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-13",
+    fullName: "Hon. Nana Kofi Sarpong",
+    constituency: "Bantama",
+    constituencyId: "c-13",
+    region: "Ashanti",
+    committee: "Education & Youth Empowerment",
+    status: "Past",
+    photoUrl: "https://ui-avatars.com/api/?name=Nana+Kofi+Sarpong&background=475569&color=ffffff&bold=true&size=250",
+    bio: "Hon. Nana Kofi Sarpong served as Youth Member of Parliament for Bantama during the 2022-2024 legislative session. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "n.sarpong@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-14",
+    fullName: "Hon. Priscilla Dzifa Gbeku",
+    constituency: "Keta",
+    constituencyId: "c-14",
+    region: "Volta",
+    committee: "Tourism, Culture & Heritage",
+    status: "Past",
+    photoUrl: "https://ui-avatars.com/api/?name=Priscilla+Gbeku&background=475569&color=ffffff&bold=true&size=250",
+    bio: "Hon. Priscilla Dzifa Gbeku served in the 2022-2024 Youth Parliament promoting coastal protection policies and eco-tourism. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "p.gbeku@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-15",
+    fullName: "Hon. Abdul-Rahman Yakubu",
+    constituency: "Savelugu",
+    constituencyId: "c-15",
+    region: "Northern",
+    committee: "Constitutional & Legal Affairs",
+    status: "Past",
+    photoUrl: "https://ui-avatars.com/api/?name=Abdul+Yakubu&background=475569&color=ffffff&bold=true&size=250",
+    bio: "Hon. Abdul-Rahman Yakubu represented Savelugu from 2021 to 2023, sponsoring resolutions on local assembly youth representation. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "a.yakubu@youthparliament.gov.gh",
+  },
+  {
+    id: "mp-16",
+    fullName: "Hon. Samuel Opoku-Nti",
+    constituency: "New Juaben South",
+    constituencyId: "c-16",
+    region: "Eastern",
+    committee: "Employment, Trade & Industry",
+    status: "Past",
+    photoUrl: "https://ui-avatars.com/api/?name=Samuel+Opoku-Nti&background=475569&color=ffffff&bold=true&size=250",
+    bio: "Hon. Samuel Opoku-Nti served in the 2021-2023 Youth Parliament promoting small-scale agribusiness loan access. SAMPLE CONTENT — FOR DEVELOPMENT ONLY.",
+    email: "s.opoku@youthparliament.gov.gh",
+  },
+];
+
+export const MOCK_CONSTITUENCIES: MockConstituency[] = [
+  {
+    id: "c-1",
+    name: "Ayawaso West Wuogon",
+    code: "GA-004",
+    region: "Greater Accra",
+    capital: "East Legon",
+    mpName: "Hon. Emmanuel Addo",
+    youthMpId: "mp-1",
+    totalYouthPopulation: "45,200",
+    activeInitiativesCount: 4,
+    description: "Ayawaso West Wuogon is a major educational and commercial hub in Greater Accra.",
+  },
+  {
+    id: "c-2",
+    name: "Subin",
+    code: "AS-012",
+    region: "Ashanti",
+    capital: "Kumasi Central",
+    mpName: "Hon. Abena Osei-Owusu",
+    youthMpId: "mp-2",
+    totalYouthPopulation: "38,900",
+    activeInitiativesCount: 3,
+    description: "Subin constituency encompasses the commercial heart of Kumasi.",
+  },
+  {
+    id: "c-3",
+    name: "Sekondi",
+    code: "WR-008",
+    region: "Western",
+    capital: "Sekondi",
+    mpName: "Hon. Kweku Mensah",
+    youthMpId: "mp-3",
+    totalYouthPopulation: "29,400",
+    activeInitiativesCount: 2,
+    description: "Sekondi is a historic coastal constituency in Western Region.",
+  },
+  {
+    id: "c-4",
+    name: "Tamale Central",
+    code: "NR-001",
+    region: "Northern",
+    capital: "Tamale",
+    mpName: "Hon. Fatimah Alhassan",
+    youthMpId: "mp-4",
+    totalYouthPopulation: "52,100",
+    activeInitiativesCount: 3,
+    description: "Tamale Central is a key urban commercial and cultural center in the Northern Region.",
+  },
+  {
+    id: "c-5",
+    name: "Cape Coast South",
+    code: "CR-010",
+    region: "Central",
+    capital: "Cape Coast",
+    mpName: "Hon. Yaw Boateng-Gyan",
+    youthMpId: "mp-5",
+    totalYouthPopulation: "31,800",
+    activeInitiativesCount: 2,
+    description: "Cape Coast South is a historic educational and coastal tourism constituency.",
+  },
+  {
+    id: "c-6",
+    name: "Koforidua Central",
+    code: "ER-005",
+    region: "Eastern",
+    capital: "Koforidua",
+    mpName: "Hon. Grace Ankrah",
+    youthMpId: "mp-6",
+    totalYouthPopulation: "34,500",
+    activeInitiativesCount: 3,
+    description: "Koforidua Central serves as the administrative and trade capital of the Eastern Region.",
+  },
+  {
+    id: "c-7",
+    name: "Ho Central",
+    code: "VR-002",
+    region: "Volta",
+    capital: "Ho",
+    mpName: "Hon. Fiifi Agyapong",
+    youthMpId: "mp-7",
+    totalYouthPopulation: "28,700",
+    activeInitiativesCount: 2,
+    description: "Ho Central is an educational and administrative center in the Volta Region.",
+  },
+  {
+    id: "c-8",
+    name: "Bolgatanga Central",
+    code: "UE-003",
+    region: "Upper East",
+    capital: "Bolgatanga",
+    mpName: "Hon. Aisha Mohammed",
+    youthMpId: "mp-8",
+    totalYouthPopulation: "26,300",
+    activeInitiativesCount: 1,
+    description: "Bolgatanga Central is a commercial craft and trade hub in Upper East.",
+  },
+  {
+    id: "c-9",
+    name: "Sunyani East",
+    code: "BO-007",
+    region: "Bono",
+    capital: "Sunyani",
+    mpName: "Hon. Kwame Appiah",
+    youthMpId: "mp-9",
+    totalYouthPopulation: "33,100",
+    activeInitiativesCount: 2,
+    description: "Sunyani East is a fast-growing agricultural and educational hub in Bono Region.",
+  },
+  {
+    id: "c-10",
+    name: "Nkwanta South",
+    code: "OT-004",
+    region: "Oti",
+    capital: "Nkwanta",
+    mpName: "Hon. Akosua Frimpong",
+    youthMpId: "mp-10",
+    totalYouthPopulation: "22,900",
+    activeInitiativesCount: 1,
+    description: "Nkwanta South is a prominent agricultural trading constituency in Oti Region.",
+  },
+  {
+    id: "c-11",
+    name: "Wa Central",
+    code: "UW-001",
+    region: "Upper West",
+    capital: "Wa",
+    mpName: "Hon. Ibrahim Musah",
+    youthMpId: "mp-11",
+    totalYouthPopulation: "27,400",
+    activeInitiativesCount: 2,
+    description: "Wa Central is the primary commercial and educational center of Upper West.",
+  },
+  {
+    id: "c-12",
+    name: "Tema East",
+    code: "GA-015",
+    region: "Greater Accra",
+    capital: "Tema",
+    mpName: "Hon. Cynthia Quaye",
+    youthMpId: "mp-12",
+    totalYouthPopulation: "41,600",
+    activeInitiativesCount: 3,
+    description: "Tema East is a major industrial harbor and maritime economic constituency.",
+  },
+  {
+    id: "c-13",
+    name: "Bantama",
+    code: "AS-003",
+    region: "Ashanti",
+    capital: "Bantama",
+    mpName: "Hon. Nana Kofi Sarpong",
+    youthMpId: "mp-13",
+    totalYouthPopulation: "36,200",
+    activeInitiativesCount: 1,
+    description: "Bantama is a vibrant urban sub-metropolis in Kumasi.",
+  },
+  {
+    id: "c-14",
+    name: "Keta",
+    code: "VR-009",
+    region: "Volta",
+    capital: "Keta",
+    mpName: "Hon. Priscilla Dzifa Gbeku",
+    youthMpId: "mp-14",
+    totalYouthPopulation: "24,800",
+    activeInitiativesCount: 1,
+    description: "Keta is a historic coastal and eco-tourism constituency in Volta Region.",
+  },
+  {
+    id: "c-15",
+    name: "Savelugu",
+    code: "NR-008",
+    region: "Northern",
+    capital: "Savelugu",
+    mpName: "Hon. Abdul-Rahman Yakubu",
+    youthMpId: "mp-15",
+    totalYouthPopulation: "25,300",
+    activeInitiativesCount: 1,
+    description: "Savelugu is a growing agricultural market constituency in Northern Region.",
+  },
+  {
+    id: "c-16",
+    name: "New Juaben South",
+    code: "ER-012",
+    region: "Eastern",
+    capital: "Koforidua",
+    mpName: "Hon. Samuel Opoku-Nti",
+    youthMpId: "mp-16",
+    totalYouthPopulation: "32,900",
+    activeInitiativesCount: 1,
+    description: "New Juaben South encompasses the urban core of Koforidua.",
+  },
+];
+
+export const MOCK_ACTIVITIES: MockActivity[] = [
+  {
+    id: "act-1",
+    title: "Ayawaso West Youth Innovation & Digital Skills Workshop",
+    mpName: "Hon. Emmanuel Addo",
+    youthMpId: "mp-1",
+    constituency: "Ayawaso West Wuogon",
+    constituencyId: "c-1",
+    region: "Greater Accra",
+    date: "20 August 2026",
+    category: "Skills Workshop",
+    youthReached: "150+",
+    photoUrl: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800",
+    description: "Organized a 2-day technical training workshop for young software developers and digital creators in the constituency.",
+  },
+  {
+    id: "act-2",
+    title: "Subin High School Civic Engagement & Governance Outreach",
+    mpName: "Hon. Abena Osei-Owusu",
+    youthMpId: "mp-2",
+    constituency: "Subin",
+    constituencyId: "c-2",
+    region: "Ashanti",
+    date: "14 August 2026",
+    category: "Civic Outreach",
+    youthReached: "800+",
+    photoUrl: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80&w=800",
+    description: "Engaged high school students on parliamentary governance, democratic participation, and youth leadership responsibilities.",
+  },
+  {
+    id: "act-3",
+    title: "Sekondi Maritime & Vocational Job Opportunity Fair",
+    mpName: "Hon. Kweku Mensah",
+    youthMpId: "mp-3",
+    constituency: "Sekondi",
+    constituencyId: "c-3",
+    region: "Western",
+    date: "08 August 2026",
+    category: "Career Fair",
+    youthReached: "300+",
+    photoUrl: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=800",
+    description: "Hosted a career fair connecting young job seekers with local maritime and industrial employers in Sekondi.",
+  },
+];
+
+export const MOCK_PETITIONS: MockPetition[] = [
+  {
+    id: "pet-1",
+    title: "Petition to Expand State Seed Grants for TVET Youth Graduates",
+    committee: "Education & Youth Empowerment",
+    leadPetitioner: "Ghana National Students Association",
+    signaturesCount: 1850,
+    targetSignatures: 2500,
+    status: "Open for Support",
+    summary: "Urging the Youth Parliament to recommend dedicated seed grants and toolkits for young graduates.",
+    dateSubmitted: "12 August 2026",
+  },
+];
+
+export const MOCK_POLLS: MockPoll[] = [
+  {
+    id: "poll-1",
+    question: "What should be the top priority for the 2026 Youth Legislative Agenda?",
+    category: "Policy Priority",
+    totalVotes: 1420,
+    options: [
+      { id: "opt-1", text: "Youth Employment & Enterprise Grants", votes: 680 },
+      { id: "opt-2", text: "Digital Infrastructure & Tech Subsidies", votes: 410 },
+    ],
+  },
+];
+
+export const MOCK_MEDIA_ITEMS: MockMediaItem[] = [
+  {
+    id: "med-1",
+    title: "Official Opening Procession of the 2026 Third Plenary Sitting",
+    type: "photo",
+    category: "Plenary Sittings",
+    date: "28 August 2026",
+    url: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=800",
+  },
+];
+
+export const MOCK_RESOURCES: MockResource[] = [
+  {
+    id: "res-1",
+    title: "Standing Orders & Rules of Procedure of the Ghana Youth Parliament",
+    category: "Standing Orders & Rules",
+    fileType: "PDF Document",
+    fileSize: "2.4 MB",
+    publishDate: "January 2026",
+    version: "v3.2 Official Edition",
+    description: "The authoritative manual governing plenary debate etiquette.",
+    featured: true,
+  },
+];
+
+export const MOCK_EVENTS: MockEvent[] = [
+  {
+    id: "event-1",
+    title: "2026 Third Quarter Plenary Sitting of the Youth Parliament",
+    category: "Parliamentary Plenary",
+    date: "15 September 2026",
+    time: "10:00 AM - 3:30 PM",
+    location: "Main Chamber, Parliament House, Accra / Official Live Stream",
+    status: "upcoming",
+    description: "The 2026 Third Quarter Plenary Sitting brings together Youth Members of Parliament across 275 constituencies.",
+    organizer: "Office of the Speaker & Parliamentary Secretariat",
+    targetAudience: "All Youth MPs and media observers.",
+    registrationNote: "Accredited Youth MPs must confirm attendance.",
+  },
+];
+
+export const MOCK_NEWS: MockNewsArticle[] = [
+  {
+    id: "news-1",
+    title: "Ghana Youth Parliament Convenes 2026 National Parliamentary Session in Accra",
+    summary: "Youth Members of Parliament across 275 constituencies gather at Parliament House.",
+    content: "The Ghana Youth Parliament has officially opened its Third Plenary Session of 2026 at Parliament House, Accra.",
+    category: "Parliamentary Sessions",
+    date: "28 August 2026",
+    readTime: "4 min read",
+    author: "Parliamentary Communications Bureau",
+    imageUrl: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=800",
+    featured: true,
+  },
+];
+
+export const MOCK_COMMITTEES: MockCommittee[] = [
+  {
+    id: "comm-1",
+    name: "Education & Youth Empowerment",
+    mandate: "Inquires into educational policy, TVET funding, digital skills development, and youth empowerment frameworks.",
+    chairName: "Hon. Emmanuel Addo",
+    chairMpId: "mp-1",
+    viceChairName: "Hon. Grace Amankwah",
+    memberCount: 24,
+    reportsCount: 5,
+  },
+];
+
+export const MOCK_LEADERSHIP: MockLeadershipMember[] = [
+  {
+    id: "lead-1",
+    title: "Rt. Hon. Speaker",
+    fullName: "Hon. Emmanuel Addo",
+    roleDescription: "Presides over all plenary sittings of the Youth Parliament.",
+    category: "presiding",
+    photoUrl: "https://ui-avatars.com/api/?name=Emmanuel+Addo&background=187B28&color=ffffff&bold=true&size=250",
+    mpId: "mp-1",
+    constituency: "Ayawaso West Wuogon",
+  },
+];
+
+export function getConstituencyById(id: string): MockConstituency | undefined {
+  return MOCK_CONSTITUENCIES.find((c) => c.id === id);
+}
+
+export function getYouthMPById(id: string): MockYouthMP | undefined {
+  return MOCK_YOUTH_MPS.find((mp) => mp.id === id);
+}
+
+export function getYouthMPByConstituencyId(constituencyId: string): MockYouthMP | undefined {
+  return MOCK_YOUTH_MPS.find((mp) => mp.constituencyId === constituencyId);
+}
+
+export function getActivitiesByConstituencyId(constituencyId: string): MockActivity[] {
+  return MOCK_ACTIVITIES.filter((act) => act.constituencyId === constituencyId);
+}
+
+export function getActivitiesByMpName(mpName: string): MockActivity[] {
+  return MOCK_ACTIVITIES.filter((act) => act.mpName === mpName);
+}
+
+export function getCommitteeById(id: string): MockCommittee | undefined {
+  return MOCK_COMMITTEES.find((comm) => comm.id === id);
+}
+
+export function getMpsByCommitteeName(committeeName: string): MockYouthMP[] {
+  return MOCK_YOUTH_MPS.filter((mp) => mp.committee === committeeName);
+}
+
+export function getNewsArticleById(id: string): MockNewsArticle | undefined {
+  return MOCK_NEWS.find((news) => news.id === id);
+}
+
+export function getEventById(id: string): MockEvent | undefined {
+  return MOCK_EVENTS.find((evt) => evt.id === id);
+}
